@@ -6,11 +6,6 @@ import tempfile
 import time
 import struct
 
-try:
-    import keyboard
-except ImportError:
-    keyboard = None
-
 import pyautogui
 from humancursor import SystemCursor
 from enum import Enum
@@ -89,10 +84,7 @@ class EmuniumBase:
         for char in text:
             randomized_offset = random.uniform(-offset, offset) / 1000
             delay = time_per_char + randomized_offset
-            if keyboard is None:
-                pyautogui.press(char)
-            else:
-                keyboard.write(char)
+            pyautogui.press(char)
             time.sleep(delay)
 
     def _scroll_smoothly_to_element(self, element_rect):
